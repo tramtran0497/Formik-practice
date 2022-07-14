@@ -1,10 +1,11 @@
-import { Form, Formik } from 'formik';
+import { FastField, Form, Formik } from 'formik';
 import React from 'react';
 import './App.css';
 import CustomField from './Components/CustomField';
 
 interface FormModel {
   name: string;
+  email: string;
 }
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Formik<FormModel>
         initialValues={{
           name: '',
+          email: '',
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -21,14 +23,20 @@ function App() {
         {({ handleSubmit, handleChange, handleBlur, values }) => {
           return (
             <Form onSubmit={handleSubmit}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                placeholder="Name"
-                onChange={handleChange}
-                onBlur={handleBlur}
+              <FastField
+                name="email"
+                label="Email"
+                type="email"
+                placeholder="Email..."
+                component={CustomField}
+              />
+
+              <FastField
                 name="name"
-                id="name"
+                label="Name"
+                type="text"
+                placeholder="Name..."
+                component={CustomField}
               />
             </Form>
           );
